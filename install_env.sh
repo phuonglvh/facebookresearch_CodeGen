@@ -1,12 +1,11 @@
-conda create --name codegen_3_10 python=3.10
-conda activate codegen_3_10
-conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.6 -c pytorch -c conda-forge
-conda install xformers -c xformers/label/dev
+python -m venv /workspace/.virtualenvs/CodeGen
 
-pip install -r requirements-notorch.txt
+source /workspace/.virtualenvs/CodeGen/bin/activate
+
+pip install -r ci_requirements.txt
 
 #install fastBPE
-git clone https://github.com/glample/fastBPE.git
+git clone https://github.com/phuonglvh/fastBPE.git
 cd fastBPE
 g++ -std=c++11 -pthread -O3 fastBPE/main.cc -IfastBPE -o fast
 python setup.py install
@@ -27,4 +26,4 @@ cd apex
 pip install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
 cd ..
 
-go get golang.org/x/tools/cmd/goimports
+# go get golang.org/x/tools/cmd/goimports
